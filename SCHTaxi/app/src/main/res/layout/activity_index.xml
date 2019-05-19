@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:id="@+id/Back_bt"
+            android:text="Back"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:id="@+id/Title"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:id="@+id/S"
+            android:text="Start"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:layout_toRightOf="@+id/S"
+            android:id="@+id/D"
+            android:text="Dest"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:layout_toRightOf="@id/D"
+            android:id="@+id/E"
+            android:text="Enter_Time"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:layout_toRightOf="@id/E"
+            android:id="@+id/I"
+            android:text="Invite_Time"/>
+
+        <EditText
+            android:id="@+id/Start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/S"
+            android:layout_alignRight="@+id/S"
+            android:layout_alignLeft="@+id/S" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/Start"
+            android:layout_alignRight="@+id/D"
+            android:layout_alignBottom="@+id/Start"
+            android:id="@+id/Dest"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/Dest"
+            android:layout_alignRight="@+id/E"
+            android:layout_alignBottom="@+id/Start"
+            android:id="@+id/Enter_T"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/Enter_T"
+            android:layout_alignRight="@+id/I"
+            android:layout_alignBottom="@+id/Start"
+            android:id="@+id/Invi_T"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_below="@+id/Start"
+            android:text="Now_P/Max_P"
+            android:id="@+id/P"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_toRightOf="@+id/P"
+            android:layout_alignBottom="@+id/P"
+            android:text="State"
+            android:id="@+id/St"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/P"
+            android:layout_alignRight="@+id/P"
+            android:layout_alignLeft="@+id/P"
+            android:id="@+id/Person"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/Person"
+            android:layout_alignBottom="@+id/Person"
+            android:layout_alignRight="@id/St"
+            android:id="@+id/State"/>
+
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="200dp"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/Cancle_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="Cancle" />
+
+            <Button
+                android:id="@+id/Alrt_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="Alrt" />
+
+            <Button
+                android:id="@+id/Join_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Join" />
+        </LinearLayout>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ChatBoard"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/Chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/Submit_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit" />
+    </LinearLayout>
+</LinearLayout>

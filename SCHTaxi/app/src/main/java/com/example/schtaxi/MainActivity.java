@@ -1,5 +1,8 @@
 package com.example.schtaxi;
 
+import android.content.ContentValues;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,18 +10,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
-
-import android.content.ContentValues;
-import android.os.AsyncTask;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private dbfunc db = new dbfunc();
-    private dbobject thing = new dbobject();
+    private dbobject user = new dbobject();
     private String url = "http://sch-hj.iptime.org:88/Taxi/";
+
     private List<dbobject> dbobjects;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -27,62 +32,64 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(this.getIntent().getStringExtra("Name")==null) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(this.getIntent());
+            user.setName(intent.getStringExtra("Name"));
+            user.setPH(intent.getStringExtra("PH"));
+            NetworkTask networkTask = new NetworkTask(url+db.SelUser(user), null);
+            networkTask.execute();
+        }
         layoutManager = new LinearLayoutManager(this);
 
-        Button sel = findViewById(R.id.sel);
-        Button del = findViewById(R.id.del);
-        Button insert = findViewById(R.id.insert);
-        Button update = findViewById(R.id.update);
-        final TextView TeV = findViewById(R.id.Text11);
+        Button Station = findViewById(R.id.Station);
+        Button School = findViewById(R.id.School);
+        Button ETC = findViewById(R.id.ETC);
+        Button info= findViewById(R.id.Info);
 
-        insert.setOnClickListener(new View.OnClickListener() {
+        Station.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                thing.setName("Test123");
-                thing.setPH("TestPH");
-                NetworkTask networkTask = new NetworkTask(url+db.AddUser(thing), null);
-                networkTask.execute();
+                Intent intent = new Intent(MainActivity.this, StationActivity.class);
+                intent.putExtra("Name", user.getName());
+                intent.putExtra("PH", user.getPH());
+                startActivity(intent);
             }
         });
 
-        sel.setOnClickListener(new View.OnClickListener() {
+        School.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                thing.setName("Test123");
-                thing.setPH("TestPH");
-                thing.setis_party(0);
-                thing.setDest("Home");
-                NetworkTask networkTask = new NetworkTask(url+db.SelUser(thing, null), null);
-                networkTask.execute();
+                Intent intent = new Intent(MainActivity.this, SchoolActivity.class);
+                intent.putExtra("Name", user.getName());
+                intent.putExtra("PH", user.getPH());
+                startActivity(intent);
             }
         });
 
-        del.setOnClickListener(new View.OnClickListener() {
+        ETC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                thing.setName("Test123");
-                thing.setPH("TestPH");
-                thing.setis_party(0);
-                thing.setDest("Home");
-                NetworkTask networkTask = new NetworkTask(url+db.SelUser(thing, null), null);
-                networkTask.execute();
+                Intent intent = new Intent(MainActivity.this, ETCActivity.class);
+                intent.putExtra("Name", user.getName());
+                intent.putExtra("PH", user.getPH());
+                startActivity(intent);
             }
         });
 
-        update.setOnClickListener(new View.OnClickListener() {
+        info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                thing.setName("Test123");
-                thing.setPH("TestPH");
-                thing.setis_party(0);
-                thing.setDest("Home");
-                NetworkTask networkTask = new NetworkTask(url+db.Update(thing, null, "Name", "Test111"), null);
-                networkTask.execute();
+                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                intent.putExtra("Name", user.getName());
+                intent.putExtra("PH", user.getPH());
+                startActivity(intent);
             }
         });
     }
-
-    public class NetworkTask extends AsyncTask<Void, Void, String>{
+    public class NetworkTask extends AsyncTask<Void, Void, String> {
         private String url;
         private ContentValues values;
 
@@ -98,16 +105,21 @@ public class MainActivity extends AppCompatActivity {
             String result; // 요청 결과를 저장할 변수.
             RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
             result = requestHttpURLConnection.request(url, values); // 해당 URL로 부터 결과물을 얻어온다.
-
             return result;
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
-            TextView Tev = findViewById(R.id.Text11);
-            Tev.setText(s);
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                if (Integer.parseInt(jsonObject.getString("is_party"))!=0){
+                    TextView textView = findViewById(R.id.Is_party);
+                    textView.setText("Joined party: "+jsonObject.getString("is_party"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             //doInBackground()로 부터 리턴된 값이 onPostExecute()의 매개변수로 넘어오므로 s를 출력한다.
         }
     }

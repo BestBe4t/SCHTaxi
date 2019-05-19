@@ -8,8 +8,8 @@ public class dbobject{
     private String Start;										//출발지
     private String Enter_Time;									//예상 탑승시간(Date로 형변환해서 사용하기)
     private String Invi_Time;									//모집 마감시간(Date로 형변환해서 사용하기)
-    private int Now_P;										//현재 인원
-    private int Entire_P;									//모집 인원
+    private int Now_P;										    //현재 인원
+    private int Entire_P;									    //모집 인원
     private String State;										//모집 상태
     private String Create_Time;									//생성 시간
     private String Cheat;										//채팅 내용

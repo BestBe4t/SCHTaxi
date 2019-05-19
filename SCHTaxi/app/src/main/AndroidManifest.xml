@@ -19,7 +19,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
+        <activity android:name=".AlterActivity"/>
+        <activity android:name=".CreateActivity"/>
+        <activity android:name=".ETCActivity"/>
+        <activity android:name=".IndexActivity"/>
+        <activity android:name=".SchoolActivity"/>
+        <activity android:name=".SettingActivity"/>
+        <activity android:name=".StationActivity"/>
+        <activity android:name=".LoginActivity"/>
+
     </application>
 
 </manifest>
