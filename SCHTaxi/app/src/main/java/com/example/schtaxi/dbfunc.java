@@ -63,6 +63,14 @@ public class dbfunc extends AppCompatActivity {
         return resault;
     }
 
+    public String DelIndex(int IDX){
+        int _IDX = IDX;
+
+        String resault = "Delete.php?IDX="+_IDX;
+
+        return resault;
+    }
+
     public String Update(dbobject user, String Table, String value, String New){
         String Name = user.getName();
         String PH = user.getPH();

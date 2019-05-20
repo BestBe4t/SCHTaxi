@@ -131,11 +131,11 @@
                 android:text="Cancle" />
 
             <Button
-                android:id="@+id/Alrt_bt"
+                android:id="@+id/Alt_bt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Alrt" />
+                android:text="Alt" />
 
             <Button
                 android:id="@+id/Join_bt"
